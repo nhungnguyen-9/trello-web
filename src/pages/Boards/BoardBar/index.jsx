@@ -1,15 +1,104 @@
 import Box from '@mui/material/Box'
+import Chip from '@mui/material/Chip'
+import RocketLaunchIcon from '@mui/icons-material/RocketLaunch'
+import StarBorderIcon from '@mui/icons-material/StarBorder'
+import Tooltip from '@mui/material/Tooltip'
+import PeopleIcon from '@mui/icons-material/People'
+import Button from '@mui/material/Button'
+import EqualizerIcon from '@mui/icons-material/Equalizer'
+import AddToDriveIcon from '@mui/icons-material/AddToDrive'
+import FlashOnIcon from '@mui/icons-material/FlashOn'
+import FilterListIcon from '@mui/icons-material/FilterList'
+import Avatar from '@mui/material/Avatar'
+import AvatarGroup from '@mui/material/AvatarGroup'
+import PersonAddIcon from '@mui/icons-material/PersonAdd'
 
 function BoardBar() {
+    const MENU_STYLES = {
+        bgcolor: 'primary.contrastText',
+        color: 'white',
+        fontSize: '18px',
+        fontWeight: 'bold',
+        borderRadius: '4px',
+        '& .MuiSvgIcon-root': {
+            color: 'secondary.main'
+        },
+        '&:hover': {
+            bgcolor: '#A6C5E229'
+        }
+    }
     return (
         <Box sx={{
-            backgroundColor: 'primary.dark',
+            backgroundColor: 'primary.contrastText',
             width: '100%',
             height: (theme) => theme.trello.boardBarHeight,
             display: 'flex',
-            alignItems: 'center'
+            alignItems: 'center',
+            // borderTop: '1px solid #ecf0f1',
+            paddingX: '6px',
+            justifyContent: 'space-between'
         }}>
-            Board bar
+            <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 2
+            }}>
+                <Chip
+                    label="Trello Agile Sprint Board"
+                    sx={MENU_STYLES}
+                    clickable
+                    icon={<RocketLaunchIcon />}
+                />
+                <StarBorderIcon sx={{ color: 'white', fontSize: '20px' }} />
+                <Tooltip title='Change visibility'>
+                    <PeopleIcon sx={{ color: 'white', fontSize: '20px' }} />
+                </Tooltip>
+                <Button variant="contained" startIcon={<EqualizerIcon sx={{ rotate: '180deg' }} />} sx={{ backgroundColor: '#DFE1E6', color: '#57606f', '&:hover': { backgroundColor: 'white' } }}>Board</Button>
+            </Box>
+            <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 2,
+                paddingRight: '8px'
+            }}>
+                <Tooltip title='Google Drive'>
+                    <AddToDriveIcon sx={{ color: 'white', fontSize: '20px' }} />
+                </Tooltip>
+                <Tooltip title='Automation'>
+                    <FlashOnIcon sx={{ color: 'white', fontSize: '20px' }} />
+                </Tooltip>
+                <Tooltip title='Filter cards'>
+                    <Button startIcon={<FilterListIcon sx={{ fontSize: '20px' }} />}>Filters</Button>
+                </Tooltip>
+                <AvatarGroup
+                    max={4}
+                    sx={{
+                        '& .MuiAvatar-root': {
+                            width: '28px',
+                            height: '28px',
+                            border: 'none',
+                            fontSize: '13px'
+                        }
+                    }}
+                >
+                    <Tooltip title='Nhung Nguyen'>
+                        <Avatar src="https://images.unsplash.com/photo-1703372617876-8da901dbd546?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+                    </Tooltip>
+                    <Tooltip title='Jasmine'>
+                        <Avatar src="https://images.unsplash.com/photo-1682687219640-b3f11f4b7234?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+                    </Tooltip>
+                    <Tooltip title='Evelyn'>
+                        <Avatar src="https://images.unsplash.com/photo-1662859694710-8567f0aa54be?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+                    </Tooltip>
+                    <Tooltip title='Steve'>
+                        <Avatar src="https://images.unsplash.com/photo-1696457175552-6f334ba7268e?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+                    </Tooltip>
+                    <Tooltip title='Lee'>
+                        <Avatar src="https://images.unsplash.com/photo-1703508872237-1a6a285d592c?q=80&w=2075&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+                    </Tooltip>
+                </AvatarGroup>
+                <Button variant="outlined" startIcon={<PersonAddIcon />} sx={{ backgroundColor: '#DFE1E6', color: '#57606f', '&:hover': { backgroundColor: 'white' } }}>Invite</Button>
+            </Box>
         </Box>
     )
 }
