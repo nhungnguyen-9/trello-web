@@ -1,5 +1,5 @@
 import { experimental_extendTheme as extendTheme } from '@mui/material/styles'
-import { orange, blue, grey } from '@mui/material/colors'
+import { blue, grey } from '@mui/material/colors'
 
 // Create a theme instance
 const theme = extendTheme({
@@ -12,7 +12,8 @@ const theme = extendTheme({
             palette: {
                 primary: {
                     main: blue[500],
-                    light: 'hsl(215,90%,32.7%)'
+                    light: 'hsl(215,90%,32.7%)',
+                    contrastText: 'hsla(215,90%,37.7%,0.9)'
                 },
                 secondary: {
                     main: '#fff'
@@ -23,7 +24,8 @@ const theme = extendTheme({
             palette: {
                 primary: {
                     main: blue[500],
-                    light: grey[900]
+                    light: grey[900],
+                    contrastText: 'hsl(215,90%,32.7%)'
                 },
                 secondary: grey
             }

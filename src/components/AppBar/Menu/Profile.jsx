@@ -31,7 +31,7 @@ function Profile() {
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
                 >
-                    <Avatar sx={{ width: 26, height: 26 }} src='https://lh3.googleusercontent.com/ogw/ANLem4bc5NqwIcE_ytghShd_VM1n2C71hfIn7ifWiWbVTw=s32-c-mo' />
+                    <Avatar sx={{ width: 26, height: 26 }} src='https://images.unsplash.com/photo-1703372617876-8da901dbd546?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' />
                 </IconButton>
             </Tooltip>
             <Menu
