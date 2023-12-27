@@ -40,11 +40,11 @@ const theme = extendTheme({
                         height: '6px'
                     },
                     '*::-webkit-scrollbar-thumb': {
-                        backgroundColor: '#bdc3c7',
+                        backgroundColor: '#dcdde1',
                         borderRadius: '8px'
                     },
                     '*::-webkit-scrollbar-thumb:hover': {
-                        backgroundColor: '#18dcff'
+                        backgroundColor: 'white'
                     }
                 }
             }
@@ -67,23 +67,18 @@ const theme = extendTheme({
         },
         MuiOutlinedInput: {
             styleOverrides: {
-                root: ({ theme }) => ({
-                    color: theme.palette.secondary.main,
+                root: {
                     fontSize: '0.875rem',
-                    '.MuiOutlinedInput-notchedOutline': {
-                        borderColor: 'white',
-                        backgroundColor: 'rgba(255, 255, 255, 0.2)'
-                    },
-                    '&:hover': {
-                        '.MuiOutlinedInput-notchedOutline': {
-                            backgroundColor: 'rgba(255, 255, 255, 0.4)',
-                            borderColor: 'white'
-                        }
-                    },
                     '& fieldset': {
                         borderWidth: '0.5px !important'
+                    },
+                    '&:hover fieldset': {
+                        borderWidth: '1px !important'
+                    },
+                    '&.Mui-focused fieldset': {
+                        borderWidth: '1px !important'
                     }
-                })
+                }
             }
         }
     }

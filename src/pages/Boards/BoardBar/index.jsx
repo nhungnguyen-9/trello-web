@@ -15,7 +15,7 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd'
 
 function BoardBar() {
     const MENU_STYLES = {
-        bgcolor: 'primary.contrastText',
+        backgroundColor: 'transparent',
         color: 'white',
         fontSize: '18px',
         fontWeight: 'bold',
@@ -29,14 +29,16 @@ function BoardBar() {
     }
     return (
         <Box sx={{
-            backgroundColor: 'primary.contrastText',
+            backgroundColor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#0000003d'),
+            backdropFilter: 'blur(4px)',
             width: '100%',
             height: (theme) => theme.trello.boardBarHeight,
             display: 'flex',
             alignItems: 'center',
-            // borderTop: '1px solid #ecf0f1',
             paddingX: '6px',
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
+            gap: 4,
+            overflowX: 'auto'
         }}>
             <Box sx={{
                 display: 'flex',
@@ -47,7 +49,7 @@ function BoardBar() {
                     label="Trello Agile Sprint Board"
                     sx={MENU_STYLES}
                     clickable
-                    icon={<RocketLaunchIcon />}
+                    icon={<RocketLaunchIcon sx={{ color: 'white !important' }} />}
                 />
                 <StarBorderIcon sx={{ color: 'white', fontSize: '20px' }} />
                 <Tooltip title='Change visibility'>
@@ -77,7 +79,8 @@ function BoardBar() {
                             width: '28px',
                             height: '28px',
                             border: 'none',
-                            fontSize: '13px'
+                            fontSize: '13px',
+                            backgroundColor: (theme) => (theme.palette.mode === 'dark' ? 'white' : 'grey[100]')
                         }
                     }}
                 >
