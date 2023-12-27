@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Box from '@mui/material/Box'
 import ModeSelect from '~/components/ModeSelect'
 import AppsIcon from '@mui/icons-material/Apps'
@@ -15,8 +16,12 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
 import Tooltip from '@mui/material/Tooltip'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 import Profile from './Menu/Profile'
+import { InputAdornment } from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search'
+import CloseIcon from '@mui/icons-material/Close'
 
 function AppBar() {
+    const [searchValue, setSearchValue] = useState('')
     return (
         <Box px={2} sx={{
             backgroundColor: 'primary.light',
@@ -66,14 +71,51 @@ function AppBar() {
             }}>
                 <TextField
                     id="outlined-search"
-                    label="Search"
-                    type="search"
+                    placeholder='Search Trello'
+                    type="text"
                     size='small'
-                    sx={{ minWidth: '120px' }}
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position='start'>
+                                <SearchIcon sx={{ color: 'white' }} />
+                            </InputAdornment>
+                        ),
+                        endAdornment: (
+                            <InputAdornment position='end'>
+                                <CloseIcon fontSize='small'
+                                    sx={{
+                                        color: searchValue ? 'rgba(255, 255, 255, 0.4)' : 'transparent',
+                                        cursor: 'pointer'
+                                    }}
+                                    onClick={() => setSearchValue('')}
+                                />
+                            </InputAdornment>
+                        )
+                    }}
+                    sx={{
+                        minWidth: '120px',
+                        maxWidth: '250px',
+                        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                        borderRadius: '6px',
+                        '& input': {
+                            color: 'white',
+                            '&::placeholder': {
+                                color: '#f5f6fa'
+                            }
+                        },
+                        '& label.Mui-focused': { color: 'white' },
+                        '& .MuiOutlinedInput-root': {
+                            '& fieldset': { border: 'none' },
+                            '&:hover fieldset': { backgroundColor: 'rgba(255, 255, 255, 0.4)' },
+                            '&.Mui-focused fieldset': { borderColor: 'white' }
+                        }
+                    }}
                 />
                 <ModeSelect />
                 <Tooltip title='Notifications'>
-                    <Badge color="error" variant="dot" sx={{ cursor: 'pointer' }}>
+                    <Badge color="warning" variant="dot" sx={{ cursor: 'pointer' }}>
                         <NotificationsNoneIcon sx={{ color: 'secondary.main' }} />
                     </Badge>
                 </Tooltip>
