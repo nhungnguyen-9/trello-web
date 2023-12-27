@@ -31,7 +31,8 @@ function AppBar() {
             alignItems: 'center',
             justifyContent: 'space-between',
             gap: 2,
-            overflowX: 'auto'
+            overflowX: 'auto',
+            '&::-webkit-scrollbar-track': { m: 2 }
         }}>
             <Box sx={{
                 display: 'flex',
