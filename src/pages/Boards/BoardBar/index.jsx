@@ -29,7 +29,7 @@ function BoardBar() {
     }
     return (
         <Box sx={{
-            backgroundColor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#0000003d'),
+            backgroundColor: (theme) => (theme.palette.mode === 'dark' ? '#172B4D' : '#0000003d'),
             backdropFilter: 'blur(4px)',
             width: '100%',
             height: (theme) => theme.trello.boardBarHeight,
@@ -38,7 +38,8 @@ function BoardBar() {
             paddingX: '6px',
             justifyContent: 'space-between',
             gap: 4,
-            overflowX: 'auto'
+            overflowX: 'auto',
+            '&::-webkit-scrollbar-track': { m: 2 }
         }}>
             <Box sx={{
                 display: 'flex',
@@ -70,17 +71,19 @@ function BoardBar() {
                     <FlashOnIcon sx={{ color: 'white', fontSize: '20px' }} />
                 </Tooltip>
                 <Tooltip title='Filter cards'>
-                    <Button startIcon={<FilterListIcon sx={{ fontSize: '20px' }} />}>Filters</Button>
+                    <Button sx={{ color: 'white' }} startIcon={<FilterListIcon sx={{ fontSize: '20px' }} />}>Filters</Button>
                 </Tooltip>
                 <AvatarGroup
                     max={4}
                     sx={{
+                        gap: '10px',
                         '& .MuiAvatar-root': {
                             width: '28px',
                             height: '28px',
                             border: 'none',
                             fontSize: '13px',
-                            backgroundColor: (theme) => (theme.palette.mode === 'dark' ? 'white' : 'grey[100]')
+                            backgroundColor: (theme) => (theme.palette.mode === 'dark' ? 'white' : 'grey[100]'),
+                            cursor: 'pointer'
                         }
                     }}
                 >
