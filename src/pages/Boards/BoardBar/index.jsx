@@ -12,21 +12,23 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Chip from '@mui/material/Chip'
 import Tooltip from '@mui/material/Tooltip'
+import { capitializeFirstLetter } from '~/utils/formatter'
 
-function BoardBar() {
-    const MENU_STYLES = {
-        backgroundColor: 'transparent',
-        color: 'white',
-        fontSize: '18px',
-        fontWeight: 'bold',
-        borderRadius: '4px',
-        '& .MuiSvgIcon-root': {
-            color: 'secondary.main'
-        },
-        '&:hover': {
-            bgcolor: '#A6C5E229'
-        }
+const MENU_STYLES = {
+    backgroundColor: 'transparent',
+    color: 'white',
+    fontSize: '18px',
+    fontWeight: 'bold',
+    borderRadius: '4px',
+    '& .MuiSvgIcon-root': {
+        color: 'secondary.main'
+    },
+    '&:hover': {
+        bgcolor: '#A6C5E229'
     }
+}
+
+function BoardBar({ board }) {
     return (
         <Box sx={{
             backgroundColor: (theme) => (theme.palette.mode === 'dark' ? '#172B4D' : '#0000003d'),
@@ -47,13 +49,15 @@ function BoardBar() {
                 gap: 2
             }}>
                 <Chip
-                    label="Trello Agile Sprint Board"
+                    label={board.title}
                     sx={MENU_STYLES}
                     clickable
                     icon={<RocketLaunchIcon sx={{ color: 'white !important' }} />}
                 />
                 <StarBorderIcon sx={{ color: 'white', fontSize: '20px' }} />
-                <Tooltip title='Change visibility'>
+                <Tooltip
+                    title={capitializeFirstLetter(board.type)}
+                >
                     <PeopleIcon sx={{ color: 'white', fontSize: '20px' }} />
                 </Tooltip>
                 <Button variant="contained" startIcon={<EqualizerIcon sx={{ rotate: '180deg' }} />} sx={{ backgroundColor: '#DFE1E6', color: '#57606f', '&:hover': { backgroundColor: 'white' } }}>Board</Button>
