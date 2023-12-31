@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box'
 import Card from './Card/Card'
 
-function ListCards() {
+function ListCards({ cards }) {
     return (
         <Box sx={{
             display: 'flex',
@@ -15,10 +15,8 @@ function ListCards() {
             '&::-webkit-scrollbar-thumb': { backgroundColor: '#ced0da' },
             '&::-webkit-scrollbar-thumb:hover': { backgroundColor: '#bfc2cf' }
         }}>
-            <Card />
-            <Card temporaryHideMedia />
-            <Card temporaryHideMedia />
-            <Card temporaryHideMedia />
+            {cards?.map(card => <Card key={card._id} card={card} />)}
+
         </Box>
     )
 }
