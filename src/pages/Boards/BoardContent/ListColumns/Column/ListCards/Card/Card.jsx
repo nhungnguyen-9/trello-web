@@ -8,17 +8,44 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
+
 function Card({ card }) {
+    const {
+        attributes,
+        listeners,
+        setNodeRef,
+        transform,
+        transition,
+        isDragging
+    } = useSortable({
+        id: card._id,
+        data: { ...card }
+    })
+
+    const dndKitCardStyles = {
+        // touchAction: 'none' //sensor default for pointer sensor
+        transform: CSS.Translate.toString(transform),
+        transition,
+        opacity: isDragging ? 0.5 : 1
+    }
+
     const showCardAction = () => {
         return !!card?.memberIds?.length || !!card?.comment?.length || !!card?.attachments?.length
     }
 
     return (
-        <MuiCard sx={{
-            cursor: 'pointer',
-            boxShadow: '0px 1px 1px #091E4240',
-            overflow: 'unset'
-        }}>
+        <MuiCard
+            ref={setNodeRef}
+            style={dndKitCardStyles}
+            {...attributes}
+            {...listeners}
+            sx={{
+                cursor: 'pointer',
+                boxShadow: '0px 1px 1px #091E4240',
+                overflow: 'unset'
+            }}>
             {card?.cover && <CardMedia sx={{ height: 140 }} image={card?.cover} />}
 
             <CardContent sx={{ p: 1.5, '&:last-child': { p: 1.5 } }}>
