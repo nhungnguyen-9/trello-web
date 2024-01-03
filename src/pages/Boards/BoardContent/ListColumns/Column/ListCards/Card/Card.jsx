@@ -28,7 +28,8 @@ function Card({ card }) {
         // touchAction: 'none' //sensor default for pointer sensor
         transform: CSS.Translate.toString(transform),
         transition,
-        opacity: isDragging ? 0.5 : 1
+        opacity: isDragging ? 0.5 : undefined,
+        border: isDragging ? '1px solid #2e86de' : undefined
     }
 
     const showCardAction = () => {
