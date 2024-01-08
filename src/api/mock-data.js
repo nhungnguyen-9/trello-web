@@ -1,7 +1,3 @@
-/**
- * YouTube: TrungQuanDev - Một Lập Trình Viên
- * Created by trungquandev.com's author on Jun 28, 2023
- */
 export const mockData = {
     board: {
         _id: 'board-id-01',
@@ -23,7 +19,7 @@ export const mockData = {
                         boardId: 'board-id-01',
                         columnId: 'column-id-01',
                         title: 'Title of card 01',
-                        description: 'Markdown Syntax (sẽ ở khóa nâng cao nhé)',
+                        description: 'Markdown Syntax',
                         cover: 'https://plus.unsplash.com/premium_photo-1661599037294-02605790ce3e?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
                         memberIds: ['test-user-id-01'],
                         comments: ['test comment 01', 'test comment 02'],
