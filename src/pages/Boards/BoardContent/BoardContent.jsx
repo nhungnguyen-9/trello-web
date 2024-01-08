@@ -1,14 +1,15 @@
 import Box from '@mui/material/Box'
 import ListColumns from './ListColumns/ListColumns'
 import { mapOrder } from '~/utils/sorts'
-import { DndContext, PointerSensor, MouseSensor, TouchSensor, useSensor, useSensors, DragOverlay, defaultDropAnimationSideEffects, closestCorners, pointerWithin, rectIntersection, getFirstCollision, closestCenter } from '@dnd-kit/core'
+import { DndContext, MouseSensor, TouchSensor, useSensor, useSensors, DragOverlay, defaultDropAnimationSideEffects, closestCorners, pointerWithin, getFirstCollision } from '@dnd-kit/core'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { arrayMove } from '@dnd-kit/sortable'
 
 import Column from './ListColumns/Column/Column'
 import Card from './ListColumns/Column/ListCards/Card/Card'
 
-import { cloneDeep, intersection } from 'lodash'
+import { cloneDeep, isEmpty } from 'lodash'
+import { generatePlaceholderCard } from '~/utils/formatter'
 
 const ACTIVE_DRAG_ITEM_TYPE = {
     COLUMN: 'ACTIVE_DRAG__ITEM_TYPE_COLUMN',
@@ -66,6 +67,12 @@ function BoardContent({ board }) {
             if (nextActiveColumn) {
                 // delete card in column active
                 nextActiveColumn.cards = nextActiveColumn.cards.filter(card => card._id !== activeDraggingCardId)
+
+                // add placeholder card when column null
+                if (isEmpty(nextActiveColumn.cards)) {
+                    nextActiveColumn.cards = [generatePlaceholderCard(nextActiveColumn)]
+                }
+
                 // update arr
                 nextActiveColumn.cardOrderIds = nextActiveColumn.cards.map(card => card._id)
             }
@@ -84,6 +91,9 @@ function BoardContent({ board }) {
 
                 // add card is dragging in overColumn follows new index
                 nextOverColumn.cards = nextOverColumn.cards.toSpliced(newCardIndex, 0, rebuild_activeDraggingCardData)
+
+                // delete placeholder card if card exist
+                nextOverColumn.cards = nextOverColumn.cards.filter(card => !card.FE_PlaceholderCard)
 
                 // update arr
                 nextOverColumn.cardOrderIds = nextOverColumn.cards.map(card => card._id)
@@ -235,17 +245,15 @@ function BoardContent({ board }) {
 
         // find intersections with pointer
         const pointerIntersections = pointerWithin(args)
-
-        // collisions algorithm
-        const intersections = !!pointerIntersections?.length ? pointerIntersections : rectIntersection(args)
+        if (!pointerIntersections?.length) return
 
         // find the first overId
-        let overId = getFirstCollision(intersections, 'id')
+        let overId = getFirstCollision(pointerIntersections, 'id')
 
         if (overId) {
             const checkColumn = orderedColumns.find(column => column._id === overId)
             if (checkColumn) {
-                overId = closestCenter({
+                overId = closestCorners({
                     ...args,
                     droppableContainers: args.droppableContainers.filter(
                         container => container.id !== overId &&
