@@ -49,14 +49,14 @@ function BoardBar({ board }) {
                 gap: 2
             }}>
                 <Chip
-                    label={board.title}
+                    label={board?.title}
                     sx={MENU_STYLES}
                     clickable
                     icon={<RocketLaunchIcon sx={{ color: 'white !important' }} />}
                 />
                 <StarBorderIcon sx={{ color: 'white', fontSize: '20px' }} />
                 <Tooltip
-                    title={capitializeFirstLetter(board.type)}
+                    title={capitializeFirstLetter(board?.type)}
                 >
                     <PeopleIcon sx={{ color: 'white', fontSize: '20px' }} />
                 </Tooltip>
