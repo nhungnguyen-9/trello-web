@@ -1,2 +1,2 @@
 // chua bien tinh
-export const API_ROOT = 'http://localhoat:8017'
+export const API_ROOT = 'http://localhost:8017'
