@@ -3,7 +3,7 @@ import BoardBar from './BoardBar'
 import BoardContent from './BoardContent/BoardContent'
 import AppBar from '~/components/AppBar/AppBar'
 import { useEffect, useState } from 'react'
-import { fetchBoardDetailsAPI } from '~/api'
+import { fetchBoardDetailsAPI, createNewColumnAPI, createNewCardAPI } from '~/api'
 
 // Board Details
 function Board() {
@@ -17,11 +17,37 @@ function Board() {
         })
     }, [])
 
+    // this function use to call API create new column and reset data in State Board
+    const createNewColumn = async (newColumnData) => {
+        const createdColumn = await createNewColumnAPI({
+            ...newColumnData,
+            boardId: board._id
+        })
+        console.log('createdColumn: ', createdColumn)
+
+        //update state board
+    }
+
+    const createNewCard = async (newCardData) => {
+        const createdCard = await createNewCardAPI({
+            ...newCardData,
+            boardId: board._id
+            // columnId: 
+        })
+        console.log('createdCard: ', createdCard)
+
+        //update state board
+    }
+
     return (
         <Container maxWidth disableGutters sx={{ backgroundColor: 'primary.main', height: '100vh' }}>
             <AppBar />
             <BoardBar board={board} />
-            <BoardContent board={board} />
+            <BoardContent
+                board={board}
+                createNewColumn={createNewColumn}
+                createNewCard={createNewCard}
+            />
         </Container>
     )
 }
