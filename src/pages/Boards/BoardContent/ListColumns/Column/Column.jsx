@@ -17,7 +17,6 @@ import Tooltip from '@mui/material/Tooltip'
 import Typography from '@mui/material/Typography'
 import { useState } from 'react'
 import ListCards from './ListCards/ListCards'
-import { mapOrder } from '~/utils/sorts'
 import TextField from '@mui/material/TextField'
 import CloseIcon from '@mui/icons-material/Close'
 import { toast } from 'react-toastify'
@@ -56,13 +55,13 @@ function Column({ column, createNewCard }) {
         setAnchorEl(null)
     }
 
-    const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, '_id')
+    const orderedCards = column.cards
 
     const [openNewCardForm, setOpenNewCardForm] = useState(false)
     const toggleOpenNewCardForm = () => setOpenNewCardForm(!openNewCardForm)
     const [newCardTitle, setNewCardTitle] = useState('')
 
-    const addNewCard = async () => {
+    const addNewCard = () => {
         if (!newCardTitle) {
             toast.error('Please enter Card Title!', { position: 'bottom-right' })
             return
@@ -74,7 +73,7 @@ function Column({ column, createNewCard }) {
             columnId: column._id
         }
 
-        await createNewCard(newCardData)
+        createNewCard(newCardData)
 
         // close state add new Card & clear input
         toggleOpenNewCardForm()
