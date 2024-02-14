@@ -24,7 +24,9 @@ import { toast } from 'react-toastify'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 
-function Column({ column, createNewCard }) {
+import { useConfirm } from 'material-ui-confirm'
+
+function Column({ column, createNewCard, deleteColumnDetails }) {
     const {
         attributes,
         listeners,
@@ -80,6 +82,23 @@ function Column({ column, createNewCard }) {
         setNewCardTitle('')
     }
 
+    // handle delete a column and a card inside it
+    const confirmDeleteColumn = useConfirm()
+
+    const handleDeleteColumn = () => {
+        confirmDeleteColumn({
+            title: 'Delete Column?',
+            description: 'This action will permanently delete your Column and its Cards! Are you sure?',
+            allowClose: false
+        })
+            .then(() => {
+                // console.log(column._id)
+                // console.log(column.title)
+                deleteColumnDetails(column._id)
+            })
+            .catch(() => { })
+    }
+
     return (
         // add a div outside to avoid flickering
         <div
@@ -130,15 +149,26 @@ function Column({ column, createNewCard }) {
                             anchorEl={anchorEl}
                             open={open}
                             onClose={handleClose}
+                            onClick={handleClose}
                             MenuListProps={{
                                 'aria-labelledby': 'basic-column-dropdown'
                             }}
                         >
-                            <MenuItem onClick={handleClose}>
+                            <MenuItem
+                                onClick={toggleOpenNewCardForm}
+                                sx={{
+                                    '&:hover': {
+                                        color: 'success.light',
+                                        '& .add-card-icon': {
+                                            color: 'success.light'
+                                        }
+                                    }
+                                }}
+                            >
                                 <ListItemIcon>
-                                    <AddIcon fontSize="small" />
+                                    <AddIcon fontSize="small" className='add-card-icon' />
                                 </ListItemIcon>
-                                <ListItemText>Add card</ListItemText>
+                                <ListItemText>Add new card</ListItemText>
                             </MenuItem>
                             <MenuItem onClick={handleClose}>
                                 <ListItemIcon>
@@ -159,11 +189,21 @@ function Column({ column, createNewCard }) {
                                 <ListItemText>Paste</ListItemText>
                             </MenuItem>
                             <Divider />
-                            <MenuItem onClick={handleClose}>
+                            <MenuItem
+                                onClick={handleDeleteColumn}
+                                sx={{
+                                    '&:hover': {
+                                        color: 'warning.dark',
+                                        '& .delete-forever-icon': {
+                                            color: 'warning.dark'
+                                        }
+                                    }
+                                }}
+                            >
                                 <ListItemIcon>
-                                    <DeleteForeverIcon fontSize="small" />
+                                    <DeleteForeverIcon fontSize="small" className='delete-forever-icon' />
                                 </ListItemIcon>
-                                <ListItemText>Remove this list</ListItemText>
+                                <ListItemText>Delete this list</ListItemText>
                             </MenuItem>
                             <MenuItem onClick={handleClose}>
                                 <ListItemIcon>
