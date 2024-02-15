@@ -6,7 +6,8 @@ if (process.env.BUILD_MODE === 'dev') {
 }
 
 if (process.env.BUILD_MODE === 'production') {
-    apiRoot = 'https://trello-zeta-nine.vercel.app'
+    apiRoot = 'https://trello-api-0lrm.onrender.com'
 }
 
+console.log('🚀 ~ apiRoot:', apiRoot)
 export const API_ROOT = apiRoot
